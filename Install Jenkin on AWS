@@ -1,0 +1,51 @@
+Create AWS Account
+Create Key Pairs  
+    name "project3"  RSA  .pem Private key file format
+Create Security Groups
+    Security group name "WebServerSG2"
+          Description: for Project3 B-safe 002
+          Inbound rule SSH type, 22 Port range, local IP/32 (67.150.64.169/32) source
+                       Custom TCP type, 8080 Port range, local IP/32 (67.150.64.169/32) source
+                       HTTP type, 80 port range,  local IP/32 (67.150.64.169/32) source
+                       
+Create EC2 Instance   Name: Project3
+                      Application: Ubuntu
+                      key pair: "Project3"
+                      Network settings: Select existing security group "WebServerSG2"
+                      
+Create.  wait till instance state as Running. 
+
+
+Download X Server 
+
+Import project3 instance using X server SSH
+
+Go to Session Choose SSH   
+     Romote host: public IP created from AWS EC2 project3 instance (54.67.25.181)
+     Check Specifiy username: Ubuntu
+Go to Advanced SSH setting  --> check use private key and browse for project3.pem file     
+Then SSH Session to ubuntu@54.67.25.181 should be created.
+
+
+Install Jenkin in instance 
+Download Java 11 runtime Environment
+   sudo apt-get update
+   sudo apt-get install openjdk-11-jdk
+   java -version (make sure openjdk version 11 was installed)
+   
+Downlaoding and installing the jenkins app
+  wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add -
+  sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list' 
+  sudo apt-get update
+  sudo apt-get install jenkins
+  sudo service jenkins status (make sure it's active running)
+  Sudo systemctl start jenkins 
+  install suggested plugins
+  skip and continue as admin
+  Start using Jenkins
+  
+  then go to web browser open localhost:8080 (54.67.25.181:8080) login to jenkin page 
+  to unlock Jenkins at terminal input
+  sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+  copy the password and paste it on jenkins page in the browser.
+
