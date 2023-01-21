@@ -48,4 +48,56 @@ Downlaoding and installing the jenkins app
   to unlock Jenkins at terminal input
   sudo cat /var/lib/jenkins/secrets/initialAdminPassword
   copy the password and paste it on jenkins page in the browser.
+  
+Install Docker
+  sudo apt-get update 
+  sudo apt-get install \
+  apt-transport-https \
+  ca-certificates \
+  curl \
+  gnupg \
+  lsb-release
+
+  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+  
+  echo \
+  "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+  sudo apt  install docker.io
+  
+  Create a file for Project3 name: "B-safe"
+  
+    mkdir B-safe
+    cd B-safe
+    
+ Create Dockerfile using Spring Boot 
+      Dockerfile
+  vi Dockerfile
+  
+"FROM openjdk:8-jdk-alpine
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]"
+  
+Executing the file 
+  sudo docker build .
+  
+ Check Docker Image
+   sudo docker images
+ 
+ install Awscli
+   sudo apt install awscli
+ 
+ Create my private repository and push Docker image into the repository (using ECR)
+   name:  project 3
+   
+   aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 171072490497.dkr.ecr.us-east-1.amazonaws.com
+   Tag Image as B-safe
+     docker tag project3:latest 171072490497.dkr.ecr.us-east-1.amazonaws.com/project3:latest
+   Push image to Repository
+     docker push 171072490497.dkr.ecr.us-east-1.amazonaws.com/project3:latest
+   
+   
+  
 
