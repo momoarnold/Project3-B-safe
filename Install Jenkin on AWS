@@ -86,18 +86,19 @@ Executing the file
  Check Docker Image
    sudo docker images
  
- install Awscli
-   sudo apt install awscli
- 
- Create my private repository and push Docker image into the repository (using ECR)
-   name:  project 3
+ Create my private repository and push Docker image into the repository (using docker hub)
+   Create Repository name project3 (private)
    
-   aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 171072490497.dkr.ecr.us-east-1.amazonaws.com
-   Tag Image as B-safe
-     docker tag project3:latest 171072490497.dkr.ecr.us-east-1.amazonaws.com/project3:latest
-   Push image to Repository
-     docker push 171072490497.dkr.ecr.us-east-1.amazonaws.com/project3:latest
    
+Back to instance
+  sudo docker login
+  
+  Tag the Spring boot image as Project3 Tag: B-safe
+    sudo docker tag 3d4243cd3984 project3:B-safe
+    
+ Push image into my private repository in dockerhub
+   
+  
    
   
 
