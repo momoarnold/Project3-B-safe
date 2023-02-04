@@ -74,12 +74,14 @@ Install Docker
  Create Dockerfile using Spring Boot 
       Dockerfile
   vi Dockerfile
-  
-"FROM openjdk:8-jdk-alpine
-ARG JAR_FILE=target/*.jar
+"
+FROM eclipse-temurin:17-jdk-alpine
+VOLUME /tmp
+ARG JAR_FILE
 COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]"
-  
+ENTRYPOINT ["java","-jar","/app.jar"]
+"
+
 Executing the file 
   sudo docker build .
   
@@ -97,7 +99,10 @@ Back to instance
     sudo docker tag 3d4243cd3984 project3:B-safe
     
  Push image into my private repository in dockerhub
-   
+ 
+ Expose the application on the respective ports so that the user can access the deployed application
+ 
+ sudo docker run -p 80:8080 images name
   
    
   
